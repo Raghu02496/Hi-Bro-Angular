@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api-service';
-import { share, shareReplay } from 'rxjs';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { todo } from './todo.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class App {
   protected readonly title = signal('Hi-Bro-Angular');
+  todoArr : Array<todo> = [];
   todoFormGrp !: FormGroup
   constructor(
     private apiService:ApiService,
@@ -33,9 +34,11 @@ export class App {
       page : 0
     }
     
-    this.apiService.getTodo(request).pipe(shareReplay(1)).subscribe({
-      next : (res)=>{
-        console.log(res,'api status')
+    this.apiService.getTodo(request).subscribe({
+      next : (res:any)=>{
+        if(res.ok){
+          this.todoArr.push(...res.data)
+        }
       }
     })
   }

@@ -9,6 +9,13 @@
         <input type="checkbox" formControlName="done">
         <button (click)="addTodo()">Add</button>
     </div>
+    
+    @for(todo of todoArr;track todo._id;let i = $index){
+        <div>
+            <span>{{i+1}} &nbsp;</span>
+            <span>{{todo.string}}</span>
+        </div>
+    }
 </div>
 
 <router-outlet />

@@ -53,7 +53,11 @@ export class App {
       this.apiService.addTodo(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
-            this.todoFormGrp.reset()
+            this.todoFormGrp.reset({
+              string: '',
+              done: false
+            })
+            this.todoArr.push(res.data)
           }
         }
       })

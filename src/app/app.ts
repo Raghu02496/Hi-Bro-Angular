@@ -65,7 +65,9 @@ export class App {
   }
 
   editTodo(todo : todo,index:number){
-    let string = prompt('What you want to do')
+    let string = prompt('What you want to do',todo.string)
+
+    // if(todo.string === string) return
 
     if(string){
       let request = {

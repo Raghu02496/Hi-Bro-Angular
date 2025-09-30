@@ -15,4 +15,13 @@ export class ApiService {
   addTodo(request: any){
     return this.httpClient.post(this.serverAddress+'/todo/addTodo',request)
   }
+
+  updateTodo(request: any){
+    return this.httpClient.post(this.serverAddress+'/todo/updateTodoById',request)
+  }
+
+  deleteTodo(request: any){
+    return this.httpClient.post(this.serverAddress+'/todo/deleteTodoById',request)
+  }
+  
 }

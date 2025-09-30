@@ -14,6 +14,8 @@
         <div>
             <span>{{i+1}} &nbsp;</span>
             <span>{{todo.string}}</span>
+            <button (click)="editTodo(todo,i)">Edit</button>
+            <button (click)="deleteTodo(todo,i)">Delete</button>
         </div>
     }
 </div>

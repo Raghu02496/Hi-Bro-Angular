@@ -60,4 +60,42 @@ export class App {
     }
   }
 
+  editTodo(todo : todo,index:number){
+    let string = prompt('What you want to do')
+
+    if(string){
+      let request = {
+        _id : todo._id,
+        string :string,
+        done : todo.done
+      }
+
+      this.apiService.updateTodo(request).subscribe({
+        next : (res:any)=>{
+          if(res.ok){
+            this.todoArr[index] = res.data
+          }
+        }
+      })
+    }
+  }
+
+  deleteTodo(todo : todo,index:number){
+    let action = confirm('You Wanna delete this')
+
+    if(action){
+      let request = {
+        _id : todo._id,
+      }
+
+      this.apiService.deleteTodo(request).subscribe({
+        next : (res:any)=>{
+          if(res.ok){
+            this.todoArr.splice(index,1);
+          }
+        }
+      })
+    }
+  }
+
 }

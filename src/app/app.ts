@@ -31,7 +31,7 @@ export class App {
   fetchTodo(){
     let request = {
       limit : 10,
-      page : 0
+      page : 1
     }
     
     this.apiService.getTodo(request).subscribe({

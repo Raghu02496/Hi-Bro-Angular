@@ -3,10 +3,15 @@ import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { todo } from './todo.interface';
+import { Header } from './header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ReactiveFormsModule],
+  imports: [
+    RouterOutlet,
+    ReactiveFormsModule,
+    Header
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

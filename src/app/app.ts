@@ -17,29 +17,37 @@ import { Header } from './header/header';
 })
 export class App {
   protected readonly title = signal('Hi-Bro-Angular');
-  todoArr : Array<todo> = [];
+  todoArr: Array<todo> = [];
   interrogateFormGrp !: FormGroup
+  conversationArr: Array<any> = [];
+  loadingResult: boolean = false
   constructor(
-    private apiService:ApiService,
-    private fb : FormBuilder
-  ){
+    private apiService: ApiService,
+    private fb: FormBuilder
+  ) {
     this.interrogateFormGrp = fb.group({
-      query : ['',Validators.required],
+      query: ['', Validators.required],
     })
   }
 
-  msgChatGpt(){
-    if(this.interrogateFormGrp.valid){
+  msgChatGpt() {
+    if (this.interrogateFormGrp.valid && !this.loadingResult) {
+      let query = this.interrogateFormGrp.get('query')?.value.trim()
       let request = {
-        query : this.interrogateFormGrp.get('query')?.value
+        query: query
       }
+      this.conversationArr.push({ from: 'user', query: query })
+      this.loadingResult = true
       this.apiService.sendMessage(request).subscribe({
-        next : (res)=>{
-          
+        next: (res: any) => {
+          if (res.ok) {
+            this.conversationArr.push({ from: 'gpt', query: res.data })
+          }
+          this.loadingResult = false
         }
       })
       this.interrogateFormGrp.reset({
-        query : ''
+        query: ''
       })
     }
   }

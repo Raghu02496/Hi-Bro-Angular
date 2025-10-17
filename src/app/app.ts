@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { todo } from './todo.interface';
+import { conversation } from './detective.interface';
 import { Header } from './header/header';
 
 @Component({
@@ -16,38 +16,36 @@ import { Header } from './header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('Hi-Bro-Angular');
-  todoArr: Array<todo> = [];
   interrogateFormGrp !: FormGroup
-  conversationArr: Array<any> = [];
+  conversationArr: Array<conversation> = [];
   loadingResult: boolean = false
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder
   ) {
     this.interrogateFormGrp = fb.group({
-      query: ['', Validators.required],
+      content: ['', Validators.required],
     })
   }
 
   msgChatGpt() {
     if (this.interrogateFormGrp.valid && !this.loadingResult) {
-      let query = this.interrogateFormGrp.get('query')?.value.trim()
+      let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
-        query: query
+        content: content
       }
-      this.conversationArr.push({ from: 'user', query: query })
+      this.conversationArr.push({ role: 'user', content: content })
       this.loadingResult = true
       this.apiService.sendMessage(request).subscribe({
         next: (res: any) => {
           if (res.ok) {
-            this.conversationArr.push({ from: 'gpt', query: res.data })
+            this.conversationArr.push({ role: 'assistant', content: res.data })
           }
           this.loadingResult = false
         }
       })
       this.interrogateFormGrp.reset({
-        query: ''
+        content: ''
       })
     }
   }

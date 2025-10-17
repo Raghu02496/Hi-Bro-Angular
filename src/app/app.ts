@@ -18,95 +18,29 @@ import { Header } from './header/header';
 export class App {
   protected readonly title = signal('Hi-Bro-Angular');
   todoArr : Array<todo> = [];
-  todoFormGrp !: FormGroup
+  interrogateFormGrp !: FormGroup
   constructor(
     private apiService:ApiService,
     private fb : FormBuilder
   ){
-    this.todoFormGrp = fb.group({
-      string : ['',Validators.required],
-      done : [false]
+    this.interrogateFormGrp = fb.group({
+      query : ['',Validators.required],
     })
   }
 
-  ngOnInit(){
-    this.fetchTodo()
-  }
-
-  fetchTodo(){
-    let request = {
-      limit : 10,
-      page : 1
-    }
-    
-    this.apiService.getTodo(request).subscribe({
-      next : (res:any)=>{
-        if(res.ok){
-          this.todoArr.push(...res.data)
-        }
-      }
-    })
-  }
-
-  addTodo(){
-    if(this.todoFormGrp.valid){
+  msgChatGpt(){
+    if(this.interrogateFormGrp.valid){
       let request = {
-        string :this.todoFormGrp.get('string')?.value,
-        done : this.todoFormGrp.get('done')?.value
+        query : this.interrogateFormGrp.get('query')?.value
       }
-
-      this.apiService.addTodo(request).subscribe({
-        next : (res:any)=>{
-          if(res.ok){
-            this.todoFormGrp.reset({
-              string: '',
-              done: false
-            })
-            this.todoArr.push(res.data)
-          }
+      this.apiService.sendMessage(request).subscribe({
+        next : (res)=>{
+          
         }
+      })
+      this.interrogateFormGrp.reset({
+        query : ''
       })
     }
   }
-
-  editTodo(todo : todo,index:number){
-    let string = prompt('What you want to do',todo.string)
-
-    // if(todo.string === string) return
-
-    if(string){
-      let request = {
-        _id : todo._id,
-        string :string,
-        done : todo.done
-      }
-
-      this.apiService.updateTodo(request).subscribe({
-        next : (res:any)=>{
-          if(res.ok){
-            this.todoArr[index] = res.data
-          }
-        }
-      })
-    }
-  }
-
-  deleteTodo(todo : todo,index:number){
-    let action = confirm('You Wanna delete this')
-
-    if(action){
-      let request = {
-        _id : todo._id,
-      }
-
-      this.apiService.deleteTodo(request).subscribe({
-        next : (res:any)=>{
-          if(res.ok){
-            this.todoArr.splice(index,1);
-          }
-        }
-      })
-    }
-  }
-
 }

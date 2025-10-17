@@ -4,12 +4,14 @@
 
 <div class="game-container">
     <div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
-        <textarea class="interrogate-box" formControlName="query" (keyup.enter)="msgChatGpt()"></textarea>
-        <button (click)="msgChatGpt()">Send</button>
+        <textarea class="interrogate-box" formControlName="content" (keyup.enter)="msgChatGpt()"></textarea>
+        <!-- <button (click)="msgChatGpt()">Send</button> -->
     </div>
     <div class="response-container">
         @for(conversation of conversationArr;track $index){
-            <b>{{conversation.from === 'user' ? 'You' : 'GPT'}}</b> : {{conversation.query}} <br>
+            <div style="padding: 5px;">
+                <b>{{conversation.role === 'user' ? 'You' : 'GPT'}}</b> : {{conversation.content}} <br>
+            </div>
         }
     </div>
 </div>

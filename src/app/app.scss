@@ -1,9 +1,16 @@
-.interrogate-box-container{
+.game-container{
     height: 100%;
     width: 100%;
-    .interrogate-box{
-        width: 30%;
-        resize: none;
-        border-radius: 5px;
+
+    .interrogate-box-container{
+        display: flex;
+        align-items: center;
+        gap : 10px;
+        
+        .interrogate-box{
+            width: 30%;
+            resize: none;
+            border-radius: 5px;
+        }
     }
 }

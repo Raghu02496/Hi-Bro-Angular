@@ -2,9 +2,11 @@
     <header></header>
 </div>
 
-<div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
-    <textarea class="interrogate-box" formControlName="query"></textarea>
-    <button (click)="msgChatGpt()">Send</button>
+<div class="game-container">
+    <div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
+        <textarea class="interrogate-box" formControlName="query"></textarea>
+        <button (click)="msgChatGpt()">Send</button>
+    </div>
 </div>
 
 <router-outlet />

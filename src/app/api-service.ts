@@ -9,7 +9,11 @@ export class ApiService {
   constructor(private httpClient : HttpClient){}
 
   sendMessage(request: any){
-    return this.httpClient.post(this.serverAddress+'/todo/msgChatGpt',request)
+    return this.httpClient.post(this.serverAddress+'/x/msgChatGpt',request)
+  }
+
+  getConversation(){
+    return this.httpClient.get(this.serverAddress+'/x/getConversation')
   }
   
 }

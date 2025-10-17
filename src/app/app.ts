@@ -28,6 +28,16 @@ export class App {
     })
   }
 
+  ngOnInit(){
+    this.apiService.getConversation().subscribe({
+      next : (res:any)=>{
+        if(res.ok){
+          this.conversationArr.push(...res.data)
+        }
+      }
+    })
+  }
+
   msgChatGpt() {
     if (this.interrogateFormGrp.valid && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()

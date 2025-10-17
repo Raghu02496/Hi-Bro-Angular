@@ -1,4 +1,9 @@
-.controls-container{
-    display: flex;
-    margin-bottom: 10px;
+.interrogate-box-container{
+    height: 100%;
+    width: 100%;
+    .interrogate-box{
+        width: 30%;
+        resize: none;
+        border-radius: 5px;
+    }
 }

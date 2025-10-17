@@ -1,24 +1,10 @@
 <div>
     <header></header>
+</div>
 
-    <div [formGroup]="todoFormGrp">
-        Add your task
-        <div class="controls-container">
-            <input type="text" formControlName="string">
-            <input type="checkbox" formControlName="done">
-            <button (click)="addTodo()">Add</button>
-        </div>
-    </div>
-    
-    @for(todo of todoArr;track todo._id;let i = $index){
-        <div>
-            <span>{{i+1}} &nbsp;</span>
-            <span>{{todo.string}}</span>
-            <span><input type="checkbox" [checked]="todo.done" (change)="todo.done = !todo.done"></span>
-            <button (click)="editTodo(todo,i)">Edit</button>
-            <button (click)="deleteTodo(todo,i)">Delete</button>
-        </div>
-    }
+<div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
+    <textarea class="interrogate-box" formControlName="query"></textarea>
+    <button (click)="msgChatGpt()">Send</button>
 </div>
 
 <router-outlet />

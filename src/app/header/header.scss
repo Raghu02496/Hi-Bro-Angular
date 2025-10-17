@@ -1,3 +1,8 @@
-.bro-container{
-    background-color: yellow;
+.header-container{
+    background-color: #fff;
+    .header-content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

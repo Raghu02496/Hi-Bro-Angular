@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,6 +19,7 @@ export class App {
   interrogateFormGrp !: FormGroup
   conversationArr: Array<conversation> = [];
   loadingResult: boolean = false
+  @ViewChild('responseBox',{read : ElementRef}) responseBox !: ElementRef<HTMLDivElement>
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder
@@ -45,11 +46,13 @@ export class App {
         content: content
       }
       this.conversationArr.push({ role: 'user', content: content })
+      this.scrollToBottomOfResponseBox()
       this.loadingResult = true
       this.apiService.sendMessage(request).subscribe({
         next: (res: any) => {
           if (res.ok) {
             this.conversationArr.push({ role: 'assistant', content: res.data })
+            this.scrollToBottomOfResponseBox()
           }
           this.loadingResult = false
         }
@@ -58,5 +61,12 @@ export class App {
         content: ''
       })
     }
+  }
+
+  scrollToBottomOfResponseBox(){
+    // To wait for browser to render the element
+    setTimeout(()=>{
+      this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
+    },100)
   }
 }

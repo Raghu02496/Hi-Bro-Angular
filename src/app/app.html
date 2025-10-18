@@ -7,7 +7,7 @@
         <textarea class="interrogate-box" formControlName="content" (keyup.enter)="msgChatGpt()"></textarea>
         <!-- <button (click)="msgChatGpt()">Send</button> -->
     </div>
-    <div class="response-container">
+    <div class="response-container" #responseBox>
         @for(conversation of conversationArr;track $index){
             <div style="padding: 5px;">
                 <b>{{conversation.role === 'user' ? 'You' : 'GPT'}}</b> : {{conversation.content}} <br>

@@ -13,11 +13,14 @@
             width: 30%;
             resize: none;
             border-radius: 5px;
+            background-color: #303030;
+            color: #fff;
+            caret-color: #fff;
         }
     }
 
     .response-container {
-        border: 1px solid black;
+        border: 1px solid white;
         margin: 10px 0px 0px 10px;
         width: 50%;
         height: 50%;

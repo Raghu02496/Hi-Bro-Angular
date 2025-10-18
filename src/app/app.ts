@@ -34,6 +34,7 @@ export class App {
       next : (res:any)=>{
         if(res.ok){
           this.conversationArr.push(...res.data)
+          this.scrollToBottomOfResponseBox()
         }
       }
     })
@@ -67,6 +68,6 @@ export class App {
     // To wait for browser to render the element
     setTimeout(()=>{
       this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
-    },100)
+    },50)
   }
 }

@@ -30,7 +30,10 @@ export class App {
   }
 
   ngOnInit(){
-    this.apiService.getConversation().subscribe({
+    let request = {
+      case_id : 'case01',
+    }
+    this.apiService.getConversation(request).subscribe({
       next : (res:any)=>{
         if(res.ok){
           this.conversationArr.push(...res.data)
@@ -44,6 +47,7 @@ export class App {
     if (this.interrogateFormGrp.valid && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
+        case_id : 'case01',
         content: content
       }
       this.conversationArr.push({ role: 'user', content: content })

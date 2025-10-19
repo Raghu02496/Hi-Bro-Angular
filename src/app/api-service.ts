@@ -12,8 +12,8 @@ export class ApiService {
     return this.httpClient.post(this.serverAddress+'/x/msgChatGpt',request)
   }
 
-  getConversation(){
-    return this.httpClient.get(this.serverAddress+'/x/getConversation')
+  getConversation(request : any){
+    return this.httpClient.post(this.serverAddress+'/x/getConversation',request)
   }
   
 }

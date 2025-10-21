@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api-service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { conversation } from './detective.interface';
+import { caseDetails, conversation, suspect } from './detective.interface';
 import { Header } from './header/header';
 
 @Component({
@@ -18,6 +18,8 @@ import { Header } from './header/header';
 export class App {
   interrogateFormGrp !: FormGroup
   conversationArr: Array<conversation> = [];
+  caseDetails !: caseDetails
+  interrogatingSuspect !: suspect
   loadingResult: boolean = false
   @ViewChild('responseBox',{read : ElementRef}) responseBox !: ElementRef<HTMLDivElement>
   constructor(
@@ -30,8 +32,14 @@ export class App {
   }
 
   ngOnInit(){
+    this.fetchCaseDetails();
+  }
+
+  getConversation(){
+    this.conversationArr = [];
     let request = {
-      case_id : 'case01',
+      case_id : '68f7159e919c7aa828fb1ed1',
+      suspect_id : this.interrogatingSuspect._id
     }
     this.apiService.getConversation(request).subscribe({
       next : (res:any)=>{
@@ -44,11 +52,12 @@ export class App {
   }
 
   msgChatGpt() {
-    if (this.interrogateFormGrp.valid && !this.loadingResult) {
+    if (this.interrogateFormGrp.valid && this.interrogatingSuspect && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
-        case_id : 'case01',
-        content: content
+        case_id : '68f7501cef94cd32bfb7fc01',
+        suspect : this.interrogatingSuspect,
+        content: content,
       }
       this.conversationArr.push({ role: 'user', content: content })
       this.scrollToBottomOfResponseBox()
@@ -74,4 +83,18 @@ export class App {
       this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
     },50)
   }
+
+  fetchCaseDetails(){
+    let request = {
+      case_id : "68f7501cef94cd32bfb7fc01"
+    }
+    this.apiService.getCaseById(request).subscribe({
+      next : (res:any)=>{
+        if(res.ok){
+          this.caseDetails = res.data
+        }
+      }
+    })
+  }
+
 }

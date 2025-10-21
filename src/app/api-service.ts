@@ -15,5 +15,9 @@ export class ApiService {
   getConversation(request : any){
     return this.httpClient.post(this.serverAddress+'/x/getConversation',request)
   }
+
+  getCaseById(request : any){
+    return this.httpClient.post(this.serverAddress+'/x/getCaseById',request)
+  }
   
 }

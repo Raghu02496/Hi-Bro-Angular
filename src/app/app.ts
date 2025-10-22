@@ -38,7 +38,7 @@ export class App {
   getConversation(){
     this.conversationArr = [];
     let request = {
-      case_id : '68f7159e919c7aa828fb1ed1',
+      case_id : '68f8bb412f45862f36939609',
       suspect_id : this.interrogatingSuspect._id
     }
     this.apiService.getConversation(request).subscribe({
@@ -55,7 +55,7 @@ export class App {
     if (this.interrogateFormGrp.valid && this.interrogatingSuspect && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
-        case_id : '68f7501cef94cd32bfb7fc01',
+        case_id : '68f8bb412f45862f36939609',
         suspect : this.interrogatingSuspect,
         content: content,
       }
@@ -86,7 +86,7 @@ export class App {
 
   fetchCaseDetails(){
     let request = {
-      case_id : "68f7501cef94cd32bfb7fc01"
+      case_id : "68f8bb412f45862f36939609"
     }
     this.apiService.getCaseById(request).subscribe({
       next : (res:any)=>{

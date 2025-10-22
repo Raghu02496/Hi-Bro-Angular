@@ -1,12 +1,18 @@
-<div>
-    <header></header>
-</div>
-
 <div class="game-container">
+    <div class="header-container">
+        <header></header>
+    </div>
+
     <div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
         <textarea class="interrogate-box" formControlName="content" (keyup.enter)="msgChatGpt()"></textarea>
-        <!-- <button (click)="msgChatGpt()">Send</button> -->
     </div>
+
+    <div class="case-description">
+        @if (caseDetails) {
+            {{caseDetails.description}}
+        }
+    </div>
+
     <div class="response-container" #responseBox>
         @for(conversation of conversationArr;track $index){
             <div style="padding: 5px;">
@@ -15,18 +21,15 @@
         }
     </div>
 
-    <div class="case-details">
-        @if (caseDetails) {
-            {{caseDetails.description}}
-            <div class="suspects-container">
-                Suspects : 
-                @for (item of caseDetails.suspects; track $index) {
-                    <div>{{item.name}} : {{item.role}}</div>
-                    <input type="checkbox" [checked]="interrogatingSuspect?._id === item._id" (change)="interrogatingSuspect = item;getConversation()">
-                }
-            </div>
-        }
-    </div>
+    @if (caseDetails) {
+        <div class="suspects-container">
+            Suspects : 
+            @for (item of caseDetails.suspects; track $index) {
+                <div>{{item.name}} : {{item.role}}</div>
+                <input type="radio" [checked]="interrogatingSuspect?._id === item._id" (change)="interrogatingSuspect = item;getConversation()">
+            }
+        </div>
+    }
 </div>
 
 

@@ -1,13 +1,22 @@
 .game-container {
-    height: 95%;
+    height: 100%;
     width: 100%;
-    margin-top: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .header-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
     .interrogate-box-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
 
         .interrogate-box {
             width: 30%;
@@ -23,7 +32,6 @@
         border-radius: 5px;
         border: 1px solid #303030;
         background-color: #171717;
-        margin: 10px;
         height: 50%;
         overflow-y: scroll;
         word-break: break-all;

@@ -1,11 +1,13 @@
-import { HttpEvent, HttpHandlerFn, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { ApiService } from './api-service';
+import { Router } from '@angular/router';
 
 export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
   
     const apiService = inject(ApiService)
+    const router = inject(Router)
     let cloned = req
     
     const isProtectedRoute = req.url.split('/')[3] === 'protected'
@@ -18,5 +20,12 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
       });
     }
   
-    return next(cloned)
+    return next(cloned).pipe(
+      catchError((error: HttpErrorResponse) => {
+        apiService.key = ""
+        router.navigate(['/login'])
+        return throwError(() => error);
+      })
+    )
+
   }

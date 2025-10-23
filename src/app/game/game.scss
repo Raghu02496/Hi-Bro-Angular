@@ -1,0 +1,43 @@
+@use '../../mixins.scss' as *;
+
+.game-container {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .header-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .interrogate-box-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .interrogate-box {
+            width: 30%;
+            resize: none;
+            @include input-box
+        }
+    }
+
+    .response-container {
+        border-radius: 5px;
+        border: 1px solid #303030;
+        background-color: #171717;
+        height: 50%;
+        overflow-y: scroll;
+        word-break: break-all;
+        white-space: pre-wrap;
+    }
+
+    .response-container::-webkit-scrollbar {
+        display: none;
+    }
+}

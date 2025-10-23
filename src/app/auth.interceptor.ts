@@ -13,7 +13,7 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
     if(isProtectedRoute){
       cloned = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${apiService.key}`
+          authorization: `Bearer ${apiService.key}`
         }
       });
     }

@@ -10,14 +10,10 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
     const apiService = inject(ApiService)
 
     let cloned = req
-    
-    const isProtectedRoute = req.url.split('/')[3] === 'protected'
-    
-    if(isProtectedRoute){
-      cloned = req.clone({
+
+    cloned = req.clone({
         withCredentials: true
-      });
-    }
+    });
 
     return next(cloned).pipe(
       catchError((error: HttpErrorResponse) => {

@@ -2,13 +2,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../api-service';
 import { conversation, caseDetails, suspect } from '../detective.interface';
-import { Header } from '../header/header';
 
 @Component({
   selector: 'game',
   imports: [
-    ReactiveFormsModule,
-    Header
+    ReactiveFormsModule
   ],
   templateUrl: './game.html',
   styleUrl: './game.scss'

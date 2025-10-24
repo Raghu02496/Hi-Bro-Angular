@@ -6,8 +6,9 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
+  isLoggedIn = false
   serverAddress  = 'http://localhost:3000'
-  key = ''
+
   constructor(private httpClient : HttpClient){}
 
   sendMessage(request: any){

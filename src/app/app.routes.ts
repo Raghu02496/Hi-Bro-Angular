@@ -13,11 +13,11 @@ export const routes: Routes = [
             ()=>{
                 const apiService = inject(ApiService);
                 const router = inject(Router);
-                const isValid = Boolean(apiService.key)
-                if(!isValid){
+                const hasAccess = apiService.isLoggedIn
+                if(!hasAccess){
                     router.navigate(['/login']);
                 }
-                return  isValid
+                return hasAccess
             }
         ]
     },

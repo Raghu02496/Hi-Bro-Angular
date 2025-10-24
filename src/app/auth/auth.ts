@@ -36,7 +36,7 @@ export class Auth {
       this.apiService.login(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
-            this.apiService.key = res.data
+            this.apiService.isLoggedIn = true
             this.router.navigate(['/detective'])
           }
         }

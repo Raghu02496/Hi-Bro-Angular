@@ -6,7 +6,7 @@ import { environment } from './../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  isLoggedIn = false
+  isLoggedIn = true
   serverAddress  = 'http://localhost:3000'
 
   constructor(private httpClient : HttpClient){}

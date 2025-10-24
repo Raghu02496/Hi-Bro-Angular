@@ -1,4 +1,4 @@
-import { Router, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { Game } from './game/game';
 import { Auth } from './auth/auth';
 import { inject } from '@angular/core';
@@ -12,11 +12,7 @@ export const routes: Routes = [
         path : 'detective', component : Game, canMatch : [
             ()=>{
                 const apiService = inject(ApiService);
-                const router = inject(Router);
                 const hasAccess = apiService.isLoggedIn
-                if(!hasAccess){
-                    router.navigate(['/login']);
-                }
                 return hasAccess
             }
         ]

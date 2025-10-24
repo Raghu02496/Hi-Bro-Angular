@@ -23,10 +23,12 @@
 
     @if (caseDetails) {
         <div class="suspects-container">
-            Suspects : 
+            Suspects (choose suspect to start interrogating): 
             @for (item of caseDetails.suspects; track $index) {
-                <div>{{item.name}} : {{item.role}}</div>
-                <input type="radio" [checked]="interrogatingSuspect?._id === item._id" (change)="interrogatingSuspect = item;getConversation()">
+                <div>
+                    <input type="radio" [checked]="interrogatingSuspect?._id === item._id" (change)="interrogatingSuspect = item;getConversation()">
+                    <span>{{item.name}} : {{item.role}}</span>
+                </div>
             }
         </div>
     }

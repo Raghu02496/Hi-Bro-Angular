@@ -18,6 +18,8 @@ export class Game {
   interrogatingSuspect !: suspect
   loadingResult: boolean = false
   @ViewChild('responseBox',{read : ElementRef}) responseBox !: ElementRef<HTMLDivElement>
+  page_no = 0;
+  loadMore = false
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder
@@ -32,19 +34,42 @@ export class Game {
   }
 
   getConversation(){
+    this.page_no = 1;
     this.conversationArr = [];
     let request = {
       case_id : '68f8bb412f45862f36939609',
-      suspect_id : this.interrogatingSuspect._id
+      suspect_id : this.interrogatingSuspect._id,
+      page_no : this.page_no
     }
     this.apiService.getConversation(request).subscribe({
       next : (res:any)=>{
         if(res.ok){
+          this.loadMore = res.data.length === 20
           this.conversationArr.push(...res.data)
           this.scrollToBottomOfResponseBox()
         }
       }
     })
+  }
+
+  getOldMessages(){
+    if(this.loadMore){
+      this.page_no ++;
+      let request = {
+        case_id : '68f8bb412f45862f36939609',
+        suspect_id : this.interrogatingSuspect._id,
+        page_no : this.page_no
+      }
+  
+      this.apiService.getConversation(request).subscribe({
+        next : (res:any)=>{
+          if(res.ok){
+            this.loadMore = res.data.length === 20
+            this.conversationArr.unshift(...res.data)
+          }
+        }
+      })
+    }
   }
 
   msgChatGpt() {

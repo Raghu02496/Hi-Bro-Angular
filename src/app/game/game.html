@@ -13,6 +13,10 @@
         }
     </div>
 
+    @if(interrogatingSuspect){
+        <button class="old-msg" (click)="getOldMessages()">Get old messages</button>
+    }
+
     <div class="response-container" #responseBox>
         @for(conversation of conversationArr;track $index){
             <div style="padding: 5px;">

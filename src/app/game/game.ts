@@ -89,7 +89,7 @@ export class Game {
         content: content,
       }
       this.conversationArr.push({_id : '', role: 'user', content: content })
-      this.scrollToBottomOfResponseBox()
+      this.observeResponseBoxMutations(true);
       this.loadingResult = true
       this.apiService.sendMessage(request).subscribe({
         next: (res: any) => {
@@ -97,7 +97,7 @@ export class Game {
             const insertedIds = res.data.insertedIds;
             this.conversationArr[this.conversationArr.length-1]._id = insertedIds[0];
             this.conversationArr.push({_id : insertedIds[1], role: 'assistant', content: res.data.reply });
-            this.scrollToBottomOfResponseBox()
+            this.observeResponseBoxMutations(true);
           }
           this.loadingResult = false
         }
@@ -106,13 +106,6 @@ export class Game {
         content: ''
       })
     }
-  }
-
-  scrollToBottomOfResponseBox(){
-    // To wait for browser to render the element
-    setTimeout(()=>{
-      this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
-    },50)
   }
 
   fetchCaseDetails(){

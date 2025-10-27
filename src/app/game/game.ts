@@ -38,7 +38,7 @@ export class Game {
   }
 
   getConversation(){
-    this.observeResponseBoxMutations();
+    this.observeResponseBoxMutations(true);
     this.page_no = 1;
     this.conversationArr = [];
     let request = {
@@ -128,11 +128,15 @@ export class Game {
     })
   }
 
-  observeResponseBoxMutations(){
+  observeResponseBoxMutations(bottomScroll = false){
     const observer = new MutationObserver(()=>{
-      const newScrollHeight = this.responseBox.nativeElement.scrollHeight;
-      const delta = newScrollHeight - this.prevScrollHeight;
-      this.responseBox.nativeElement.scrollTop = this.prevScrollTop + delta;
+      if(bottomScroll){
+        this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
+      }else{
+        const newScrollHeight = this.responseBox.nativeElement.scrollHeight;
+        const delta = newScrollHeight - this.prevScrollHeight;
+        this.responseBox.nativeElement.scrollTop = this.prevScrollTop + delta;
+      }
       observer.disconnect();
     })
 

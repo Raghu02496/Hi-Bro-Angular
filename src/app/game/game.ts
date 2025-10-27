@@ -70,6 +70,8 @@ export class Game {
       this.apiService.getConversation(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
+            this.prevScrollTop = this.responseBox.nativeElement.scrollTop;
+            this.prevScrollHeight = this.responseBox.nativeElement.scrollHeight;
             this.loadMore = res.data.length === 20
             this.conversationArr.unshift(...res.data)
           }
@@ -127,8 +129,6 @@ export class Game {
   }
 
   observeResponseBoxMutations(){
-    this.prevScrollTop = this.responseBox.nativeElement.scrollTop;
-    this.prevScrollHeight = this.responseBox.nativeElement.scrollHeight;
     const observer = new MutationObserver(()=>{
       const newScrollHeight = this.responseBox.nativeElement.scrollHeight;
       const delta = newScrollHeight - this.prevScrollHeight;

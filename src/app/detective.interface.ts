@@ -1,4 +1,5 @@
 export interface conversation{
+    _id : string
     role : 'user' | 'assistant'
     content : string
 }

@@ -38,7 +38,6 @@ export class Game {
   }
 
   getConversation(){
-    this.observeResponseBoxMutations(true);
     this.page_no = 1;
     this.conversationArr = [];
     let request = {
@@ -51,6 +50,7 @@ export class Game {
         if(res.ok){
           this.loadMore = res.data.length === 20
           this.conversationArr.push(...res.data)
+          this.observeResponseBoxMutations(true);
         }
       }
     })

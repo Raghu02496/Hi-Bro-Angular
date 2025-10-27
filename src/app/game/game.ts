@@ -51,7 +51,6 @@ export class Game {
         if(res.ok){
           this.loadMore = res.data.length === 20
           this.conversationArr.push(...res.data)
-          this.scrollToBottomOfResponseBox()
         }
       }
     })

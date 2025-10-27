@@ -4,7 +4,7 @@
     </div>
 
     <div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
-        <textarea class="interrogate-box" formControlName="content" (keyup.enter)="msgChatGpt()"></textarea>
+        <textarea class="interrogate-box" formControlName="content" (keyup.enter)="msgChatGpt()" placeholder="Type and enter to question suspect"></textarea>
     </div>
 
     <div class="case-description">

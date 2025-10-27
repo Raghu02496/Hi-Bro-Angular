@@ -112,7 +112,7 @@ export class Game {
     // To wait for browser to render the element
     setTimeout(()=>{
       this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
-    })
+    },50)
   }
 
   fetchCaseDetails(){

@@ -16,7 +16,7 @@
     <div class="response-container" #responseBox>
         @for(conversation of conversationArr;track conversation._id;let first = $first){
             <div style="padding: 5px;">
-                @if(first && !(conversationArr.length % 20)){
+                @if(first && loadMore){
                     <span InfiniteScroll (intersected)="getOldMessages()"></span>
                 }
                 <b>{{conversation.role === 'user' ? 'You' : interrogatingSuspect.name}}</b> : {{conversation.content}} <br>

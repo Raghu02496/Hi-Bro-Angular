@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../api-service';
 import { conversation, caseDetails, suspect } from '../detective.interface';
 import { InfiniteScroll } from '../directives/infinite-scroll';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'game',
@@ -24,13 +25,17 @@ export class Game {
   prevScrollHeight = 0;
   page_no = 0;
   loadMore = false
+  case_id = ""
   constructor(
     private apiService: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activatedRoute : ActivatedRoute
   ) {
     this.interrogateFormGrp = fb.group({
       content: ['', Validators.required],
     })
+
+    this.case_id = activatedRoute.snapshot.paramMap.get('id') as string
   }
 
   ngOnInit(){
@@ -41,7 +46,7 @@ export class Game {
     this.page_no = 1;
     this.conversationArr = [];
     let request = {
-      case_id : '68f8bb412f45862f36939609',
+      case_id : this.caseDetails._id,
       suspect_id : this.interrogatingSuspect._id,
       page_no : this.page_no
     }
@@ -62,7 +67,7 @@ export class Game {
       this.observeResponseBoxMutations();
       this.page_no ++;
       let request = {
-        case_id : '68f8bb412f45862f36939609',
+        case_id : this.caseDetails._id,
         suspect_id : this.interrogatingSuspect._id,
         page_no : this.page_no
       }
@@ -84,7 +89,7 @@ export class Game {
     if (this.interrogateFormGrp.valid && this.interrogatingSuspect && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
-        case_id : '68f8bb412f45862f36939609',
+        case_id : this.caseDetails._id,
         suspect : this.interrogatingSuspect,
         content: content,
       }
@@ -110,7 +115,7 @@ export class Game {
 
   fetchCaseDetails(){
     let request = {
-      case_id : "68f8bb412f45862f36939609"
+      case_id : this.case_id
     }
     this.apiService.getCaseById(request).subscribe({
       next : (res:any)=>{

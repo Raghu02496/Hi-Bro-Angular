@@ -1,0 +1,18 @@
+.page-container{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    .case-container{
+        margin-top: 10px;
+        padding: 10px;
+        display: flex;
+        .case{
+            height: 100px;
+            border: 1px solid #303030;
+            .question-mark{
+                text-align: center;
+                font-size: xxx-large;
+            }
+        }
+    }
+}

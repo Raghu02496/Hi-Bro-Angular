@@ -1,0 +1,15 @@
+<div class="page-container">
+    Choose case
+    <div class="case-container">
+        @for (item of cases; track item._id) {
+            <div class="case" (click)="navigateToCase(item._id)">
+                <div class="question-mark">
+                    ?
+                </div>
+                <div>
+                    {{item.title}}
+                </div>
+            </div>
+        }
+    </div>
+</div>

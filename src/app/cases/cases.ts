@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
   styleUrl: './cases.scss'
 })
 export class Cases {
-  cases : Array<any> = [];
+  cases : Array<{_id : string, title : string}> = [];
   constructor(
     private apiService : ApiService,
     private router : Router

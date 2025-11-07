@@ -5,6 +5,7 @@ export interface conversation{
 }
 
 export interface caseDetails{
+    _id : string
     title : string,
     description : string,
     suspects : Array<suspect>,

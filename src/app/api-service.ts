@@ -23,12 +23,20 @@ export class ApiService {
     return this.httpClient.post(environment.apiUrl+'/protected/getCaseById',request)
   }
 
+  listCases(request: any){
+    return this.httpClient.post(environment.apiUrl+'/protected/listCases',request)
+  }
+
   login(request : any){
     return this.httpClient.post(environment.apiUrl+'/public/login',request)
   }
 
   logout(request : any){
     return this.httpClient.post(environment.apiUrl+'/public/logout',request)
+  }
+
+  refresh(request : any){
+    return this.httpClient.post(environment.apiUrl+'/refresh',request)
   }
   
 }

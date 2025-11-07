@@ -6,3 +6,11 @@ html,body {
     background: #212121;
     color: white;
 }
+
+html{
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}

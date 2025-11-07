@@ -4,6 +4,7 @@ import { ApiService } from '../api-service';
 import { conversation, caseDetails, suspect } from '../detective.interface';
 import { InfiniteScroll } from '../directives/infinite-scroll';
 import { ActivatedRoute } from '@angular/router';
+import { whiteSpaceValidator } from '../validators/validators';
 
 @Component({
   selector: 'game',
@@ -32,7 +33,7 @@ export class Game {
     private activatedRoute : ActivatedRoute
   ) {
     this.interrogateFormGrp = fb.group({
-      content: ['', Validators.required],
+      content: ['', [Validators.required,whiteSpaceValidator()]],
     })
 
     this.case_id = activatedRoute.snapshot.paramMap.get('id') as string
@@ -85,8 +86,14 @@ export class Game {
     }
   }
 
-  msgChatGpt() {
-    if (this.interrogateFormGrp.valid && this.interrogatingSuspect && !this.loadingResult) {
+  msgChatGpt(event : Event) {
+    event.preventDefault();
+    if(!this.interrogatingSuspect){
+      alert("Choose suspect first 🤦")
+      return
+    }
+
+    if (this.interrogateFormGrp.valid && !this.loadingResult) {
       let content = this.interrogateFormGrp.get('content')?.value.trim()
       let request = {
         case_id : this.caseDetails._id,

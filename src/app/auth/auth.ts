@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from "@angular/router";
 import { ApiService } from '../api-service';
 import { CommonModule } from '@angular/common';
+import { whiteSpaceValidator } from '../validators/validators';
 
 @Component({
   selector: 'app-auth',
@@ -23,8 +24,8 @@ export class Auth {
     private router : Router
   ){
     this.loginFrmGrp = fb.group({
-      userName : ['',Validators.required],
-      password : ['',Validators.required]
+      userName : ['',[Validators.required, whiteSpaceValidator()]],
+      password : ['',[Validators.required, whiteSpaceValidator()]]
     })
   }
 

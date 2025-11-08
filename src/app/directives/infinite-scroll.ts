@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, output } from '@angular/core';
+import { Directive, ElementRef, output } from '@angular/core';
 
 @Directive({
   selector: '[InfiniteScroll]'

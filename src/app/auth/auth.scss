@@ -13,9 +13,5 @@
         }
         @include input-box
     }
-    .login-btn{
-        background: #303030;
-        color: #fff;
-        cursor: pointer;
-    }
+    @include button;
 }

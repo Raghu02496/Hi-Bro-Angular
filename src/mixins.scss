@@ -39,3 +39,11 @@
         display: none;
     }
 }
+
+@mixin button {
+    .btn{
+        background: #303030;
+        color: #fff;
+        cursor: pointer;
+    }
+}

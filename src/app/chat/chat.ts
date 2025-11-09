@@ -25,9 +25,9 @@ export class Chat {
 
   ngOnInit(){
     this.apiService.recieveMessage().subscribe({
-      next : (message)=>{
-        if(this.selectedUser){
-          this.messagesArr.push(message)
+      next : (data:any)=>{
+        if(this.selectedUser._id === data.fromUserId){
+          this.messagesArr.push(data.message)
         }
       }
     })

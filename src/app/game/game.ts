@@ -21,7 +21,7 @@ export class Game {
   caseDetails !: caseDetails
   interrogatingSuspect !: suspect
   loadingResult: boolean = false
-  @ViewChild('responseBox',{read : ElementRef}) responseBox !: ElementRef<HTMLDivElement>
+  @ViewChild('chatBox',{read : ElementRef}) chatBox !: ElementRef<HTMLDivElement>
   prevScrollTop = 0;
   prevScrollHeight = 0;
   page_no = 0;
@@ -76,8 +76,8 @@ export class Game {
       this.apiService.getConversation(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
-            this.prevScrollTop = this.responseBox.nativeElement.scrollTop;
-            this.prevScrollHeight = this.responseBox.nativeElement.scrollHeight;
+            this.prevScrollTop = this.chatBox.nativeElement.scrollTop;
+            this.prevScrollHeight = this.chatBox.nativeElement.scrollHeight;
             this.loadMore = res.data.length === 20
             this.conversationArr.unshift(...res.data)
           }
@@ -136,15 +136,15 @@ export class Game {
   observeResponseBoxMutations(bottomScroll = false){
     const observer = new MutationObserver(()=>{
       if(bottomScroll){
-        this.responseBox.nativeElement.scrollTop = this.responseBox.nativeElement.scrollHeight
+        this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight
       }else{
-        const newScrollHeight = this.responseBox.nativeElement.scrollHeight;
+        const newScrollHeight = this.chatBox.nativeElement.scrollHeight;
         const delta = newScrollHeight - this.prevScrollHeight;
-        this.responseBox.nativeElement.scrollTop = this.prevScrollTop + delta;
+        this.chatBox.nativeElement.scrollTop = this.prevScrollTop + delta;
       }
       observer.disconnect();
     })
 
-    observer.observe(this.responseBox.nativeElement,{ childList: true, subtree: true });
+    observer.observe(this.chatBox.nativeElement,{ childList: true, subtree: true });
   }
 }

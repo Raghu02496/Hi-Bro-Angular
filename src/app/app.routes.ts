@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Game } from './game/game';
 import { Auth } from './auth/auth';
 import { Cases } from './cases/cases';
+import { Chat } from './chat/chat';
 
 export const routes: Routes = [
     {
@@ -15,5 +16,8 @@ export const routes: Routes = [
     },
     {
         path : 'login', component : Auth
+    },
+    {
+        path : 'chat', component : Chat
     }
 ];

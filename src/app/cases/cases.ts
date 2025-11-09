@@ -32,4 +32,9 @@ export class Cases {
   navigateToCase(case_id:string){
     this.router.navigate([`/case/${case_id}`])
   }
+
+  openChat(){
+    this.router.navigate(['/chat'])
+  }
+
 }

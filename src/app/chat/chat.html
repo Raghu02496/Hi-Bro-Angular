@@ -1,0 +1,24 @@
+<div class="chat-container">
+    <div class="interrogate-box-container" [formGroup]="messageFormGrp">
+        <textarea class="interrogate-box" formControlName="message" (keydown.enter)="sendMessage($event)" placeholder="Type and enter to send message"></textarea>
+    </div>
+    
+    <div class="response-container" #responseBox>
+        @for(message of messagesArr;track $index;let first = $first){
+            <div style="padding: 5px;">
+                {{message}} <br>
+            </div>
+        }
+    </div>
+
+    <div class="suspects-container">
+        Users (choose user to start chatting): 
+        @for (item of users; track $index) {
+            <div>
+                <input type="radio" [checked]="selectedUser?._id === item._id" (change)="selectedUser = item;messagesArr = []">
+                <span>{{item.userName}}</span>
+            </div>
+        }
+    </div>
+
+</div>

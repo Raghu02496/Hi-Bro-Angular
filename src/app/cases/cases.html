@@ -1,5 +1,10 @@
 <div class="page-container">
-    Choose case <button (click)="openChat()" class="btn">Chat</button>
+    <div class="experimental-feature">
+        Checkout this experimental feature ->
+        <button (click)="openChat()" class="btn">Chat</button>
+    </div>
+    
+    <div>Choose case :</div>
     <div class="case-container">
         @for (item of cases; track item._id) {
             <div class="case" (click)="navigateToCase(item._id)">

@@ -2,11 +2,16 @@
 .page-container{
     height: 100%;
     width: 100%;
-    @include button;
+    padding: 10px;
+
+    .experimental-feature{
+        display: flex;
+        justify-content: center;
+        @include button;
+    }
 
     .case-container{
         margin-top: 10px;
-        padding: 10px;
         gap : 10px;
         display: flex;
         .case{

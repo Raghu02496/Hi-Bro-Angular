@@ -14,20 +14,8 @@
         justify-content: center;
     }
 
-    .interrogate-box-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .interrogate-box {
-            width: 30%;
-            @media (max-width: 600px){
-                width: 50%;
-            }
-            resize: none;
-            @include input-box
-        }
-    }
+    @include editor;
+    @include chatBox;
 
     .old-msg{
         width: 8%;
@@ -36,17 +24,4 @@
         cursor: pointer;
     }
 
-    .response-container {
-        border-radius: 5px;
-        border: 1px solid #303030;
-        background-color: #171717;
-        height: 50%;
-        overflow-y: scroll;
-        word-break: break-all;
-        white-space: pre-wrap;
-    }
-
-    .response-container::-webkit-scrollbar {
-        display: none;
-    }
 }

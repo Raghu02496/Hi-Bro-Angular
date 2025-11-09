@@ -1,9 +1,9 @@
 <div class="chat-container">
-    <div class="interrogate-box-container" [formGroup]="messageFormGrp">
-        <textarea class="interrogate-box" formControlName="message" (keydown.enter)="sendMessage($event)" placeholder="Type and enter to send message"></textarea>
+    <div class="editor-container" [formGroup]="messageFormGrp">
+        <textarea class="editor-box" formControlName="message" (keydown.enter)="sendMessage($event)" placeholder="Type and enter to send message"></textarea>
     </div>
     
-    <div class="response-container" #responseBox>
+    <div class="chat-container" #responseBox>
         @for(message of messagesArr;track $index;let first = $first){
             <div style="padding: 5px;">
                 {{message}} <br>

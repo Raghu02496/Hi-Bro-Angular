@@ -3,8 +3,8 @@
         Ready to crack the case ?
     </div>
 
-    <div class="interrogate-box-container" [formGroup]="interrogateFormGrp">
-        <textarea class="interrogate-box" formControlName="content" (keydown.enter)="msgChatGpt($event)" placeholder="Type and enter to question suspect"></textarea>
+    <div class="editor-container" [formGroup]="interrogateFormGrp">
+        <textarea class="editor-box" formControlName="content" (keydown.enter)="msgChatGpt($event)" placeholder="Type and enter to question suspect"></textarea>
     </div>
 
     <div class="case-description">
@@ -13,7 +13,7 @@
         }
     </div>
 
-    <div class="response-container" #responseBox>
+    <div class="chat-container" #responseBox>
         @for(conversation of conversationArr;track conversation._id;let first = $first){
             <div style="padding: 5px;">
                 @if(first && loadMore){

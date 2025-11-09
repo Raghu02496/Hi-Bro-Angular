@@ -18,6 +18,9 @@ export class App {
   }
 
   ngOnInit(){
+    setInterval(()=>{
+      this.apiService.status({}).subscribe();
+    }, 14 * 60 * 1000)
     this.apiService.connectSocket.next();
   }
 }

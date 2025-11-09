@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../api-service';
 import { whiteSpaceValidator } from '../validators/validators';
@@ -16,7 +16,8 @@ export class Chat {
   users : Array<any> = [];
   messageFormGrp !: FormGroup;
   selectedUser  : any
- 
+  @ViewChild('chatBox',{read : ElementRef}) chatBox !: ElementRef<HTMLDivElement>
+
   constructor(private apiService : ApiService,private fb : FormBuilder){
     this.messageFormGrp = fb.group({
       message: ['', [Validators.required,whiteSpaceValidator()]],
@@ -28,6 +29,7 @@ export class Chat {
       next : (data:any)=>{
         if(this.selectedUser._id === data.fromUserId){
           this.messagesArr.push(data.message)
+          this.scrollToBottom();
         }
       }
     })
@@ -48,11 +50,17 @@ export class Chat {
       const message = this.messageFormGrp.get('message')?.value.trim()
       this.messagesArr.push(message)
       this.apiService.testSocket({toUserId : this.selectedUser._id, message : message});
-
+      this.scrollToBottom();
       this.messageFormGrp.reset({
         message: ''
       })
     }
+  }
+
+  scrollToBottom(){
+    setTimeout(() => {
+      this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight
+    }, 50);
   }
 
 }

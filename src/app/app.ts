@@ -21,6 +21,5 @@ export class App {
     setInterval(()=>{
       this.apiService.status({}).subscribe();
     }, 14 * 60 * 1000)
-    this.apiService.connectSocket.next();
   }
 }

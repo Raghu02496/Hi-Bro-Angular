@@ -22,6 +22,8 @@ export class Chat {
     this.messageFormGrp = fb.group({
       message: ['', [Validators.required,whiteSpaceValidator()]],
     })
+
+    this.apiService.connectSocket.next();
   }
 
   ngOnInit(){
@@ -61,6 +63,10 @@ export class Chat {
     setTimeout(() => {
       this.chatBox.nativeElement.scrollTop = this.chatBox.nativeElement.scrollHeight
     }, 50);
+  }
+
+  ngOnDestroy(){
+    this.apiService.io.disconnect();
   }
 
 }

@@ -44,7 +44,6 @@ export class Auth {
         next : (res:any)=>{
           if(res.ok){
             this.apiService.isLoggedIn = true;
-            this.apiService.connectSocket.next();
             this.router.navigate(['/cases'])
           }
         }

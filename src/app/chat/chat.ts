@@ -51,7 +51,7 @@ export class Chat {
     if(this.messageFormGrp.valid && this.selectedUser){
       const message = this.messageFormGrp.get('message')?.value.trim()
       this.messagesArr.push(message)
-      this.apiService.testSocket({toUserId : this.selectedUser._id, message : message});
+      this.apiService.sendSocket({toUserId : this.selectedUser._id, message : message});
       this.scrollToBottom();
       this.messageFormGrp.reset({
         message: ''

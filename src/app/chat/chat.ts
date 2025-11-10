@@ -66,7 +66,7 @@ export class Chat {
   }
 
   ngOnDestroy(){
-    this.apiService.io.disconnect();
+    this.apiService.socket.disconnect();
   }
 
 }

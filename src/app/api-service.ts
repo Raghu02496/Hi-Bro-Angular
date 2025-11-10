@@ -59,7 +59,7 @@ export class ApiService {
   }
 
   status(request : any){
-    return this.httpClient.post(environment.apiUrl+'/status',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/status',request)
   }
 
   listUsers(request: any){

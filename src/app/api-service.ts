@@ -9,19 +9,25 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ApiService {
   isLoggedIn = false
-  serverAddress  = 'http://localhost:3000'
   connectSocket : Subject<void> = new Subject()
-  io !: Socket
+  socket !: Socket
   messageObservable$ !: Observable<string>
   constructor(private httpClient : HttpClient){
+    this.connectWebSocket();
+  }
+
+  connectWebSocket(){
     this.connectSocket.subscribe({
       next : ()=>{
-        this.io = io(environment.apiUrl,{ withCredentials : true });
-        this.messageObservable$ = new Observable((subscriber)=>{
-          this.io.on('sendMessage',(msg)=>{
-            subscriber.next(msg)
+        if(this.isLoggedIn){
+          this.socket = io(environment.apiUrl,{ withCredentials : true });
+
+          this.messageObservable$ = new Observable((subscriber)=>{
+            this.socket.on('sendMessage',(msg)=>{
+              subscriber.next(msg)
+            })
           })
-        })
+        }
       }
     })
   }
@@ -66,8 +72,8 @@ export class ApiService {
     return this.httpClient.post(environment.apiUrl+'/protected/listUsers',request)
   }
 
-  testSocket(payload : any){
-    this.io.emit('sendMessage',payload)
+  sendSocket(payload : any){
+    this.socket.emit('sendMessage',payload)
   }
   
 }

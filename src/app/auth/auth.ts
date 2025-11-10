@@ -32,6 +32,7 @@ export class Auth {
   ngOnInit(){
     this.startTimer();
     this.apiService.logout({}).subscribe();
+    this.apiService.isLoggedIn = false;
   }
 
   login(){

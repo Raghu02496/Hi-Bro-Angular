@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { ApiService } from '../../api-service';
@@ -15,9 +15,7 @@ import { whiteSpaceValidator } from '../../validators/validators';
   styleUrl: './login.scss'
 })
 export class Auth {
-
   loginFrmGrp !: FormGroup
-  // timer = signal(50);
   constructor(
     private fb : FormBuilder,
     private apiService : ApiService,
@@ -30,7 +28,6 @@ export class Auth {
   }
 
   ngOnInit(){
-    // this.startTimer();
     this.apiService.logout({}).subscribe();
     this.apiService.isLoggedIn = false;
   }
@@ -51,15 +48,4 @@ export class Auth {
       })
     }
   }
-
-  // startTimer(){
-  //   let interval = setInterval(()=>{
-  //     if(this.timer() > 0){
-  //       this.timer.update((val)=> val-1);
-  //     }else{
-  //       clearInterval(interval);
-  //     }
-  //   },1000)
-  // }
-
 }

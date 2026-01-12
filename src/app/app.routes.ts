@@ -10,15 +10,21 @@ export const routes: Routes = [
         path : '', redirectTo : 'login', pathMatch: 'full'
     },
     {
-        path : 'case/:id', component : Game, canMatch : [checkLoggedInGuard]
-    },
-    {
-        path : 'cases', component : Cases, canMatch : [checkLoggedInGuard]
+        path : 'app',
+        children:[
+            {
+                path : 'case/:id', component : Game, 
+            },
+            {
+                path : 'cases', component : Cases
+            },
+            {
+                path : 'chat', component : Chat
+            }
+        ],
+        canMatch : [checkLoggedInGuard]
     },
     {
         path : 'login', component : Auth
-    },
-    {
-        path : 'chat', component : Chat, canMatch : [checkLoggedInGuard]
     }
 ];

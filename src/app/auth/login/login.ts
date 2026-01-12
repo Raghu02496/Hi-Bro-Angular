@@ -45,7 +45,7 @@ export class Auth {
         next : (res:any)=>{
           if(res.ok){
             this.apiService.isLoggedIn = true;
-            this.router.navigate(['/cases'])
+            this.router.navigate(['/app/cases'])
           }
         }
       })

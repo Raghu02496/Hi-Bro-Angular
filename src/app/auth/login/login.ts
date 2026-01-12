@@ -1,18 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { ApiService } from '../api-service';
+import { ApiService } from '../../api-service';
 import { CommonModule } from '@angular/common';
-import { whiteSpaceValidator } from '../validators/validators';
+import { whiteSpaceValidator } from '../../validators/validators';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-login',
   imports: [
     ReactiveFormsModule,
     CommonModule
   ],
-  templateUrl: './auth.html',
-  styleUrl: './auth.scss'
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
 })
 export class Auth {
 

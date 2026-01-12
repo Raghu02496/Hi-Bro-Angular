@@ -1,23 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { ApiService } from '../api-service';
+import { ApiService } from '../../api-service';
 import { CommonModule } from '@angular/common';
-import { whiteSpaceValidator } from '../validators/validators';
+import { whiteSpaceValidator } from '../../validators/validators';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-login',
   imports: [
     ReactiveFormsModule,
     CommonModule
   ],
-  templateUrl: './auth.html',
-  styleUrl: './auth.scss'
+  templateUrl: './login.html',
+  styleUrl: './login.scss'
 })
 export class Auth {
-
   loginFrmGrp !: FormGroup
-  // timer = signal(50);
   constructor(
     private fb : FormBuilder,
     private apiService : ApiService,
@@ -30,7 +28,6 @@ export class Auth {
   }
 
   ngOnInit(){
-    // this.startTimer();
     this.apiService.logout({}).subscribe();
     this.apiService.isLoggedIn = false;
   }
@@ -45,21 +42,10 @@ export class Auth {
         next : (res:any)=>{
           if(res.ok){
             this.apiService.isLoggedIn = true;
-            this.router.navigate(['/cases'])
+            this.router.navigate(['/app/cases'])
           }
         }
       })
     }
   }
-
-  // startTimer(){
-  //   let interval = setInterval(()=>{
-  //     if(this.timer() > 0){
-  //       this.timer.update((val)=> val-1);
-  //     }else{
-  //       clearInterval(interval);
-  //     }
-  //   },1000)
-  // }
-
 }

@@ -3,6 +3,12 @@
     background-color: #303030;
     color: #fff;
     caret-color: #fff;
+    padding: 5px;
+    outline: none;
+
+    &:focus{
+        border-color: #5865f2;;
+    }
 }
 
 @mixin editor {

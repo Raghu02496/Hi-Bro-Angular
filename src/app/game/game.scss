@@ -1,27 +1,51 @@
 @use '../../mixins.scss' as *;
 
 .game-container {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+    "case-description case-description"
+    "suspect-list chat-box"
+    "editor editor";
     gap: 10px;
 
-    .header-container{
+    .suspects-container{
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+
+        .suspect{
+            padding: 10px;
+            border-top: 1px solid gray;
+        }
+
+        .active{
+            opacity: 0.5;
+        }
     }
 
-    @include editor;
-    @include chatBox;
+    .chat-box{
+        border-radius: 5px;
+        border: 1px solid #303030;
+        background-color: #171717;
+        overflow-y: auto;
+        word-break: break-all;
+        white-space: pre-wrap;
 
-    .old-msg{
-        width: 8%;
-        background: #303030;
-        color: #fff;
-        cursor: pointer;
+        @include hideScrollBar;
+    }
+
+    .editor-box {
+        width: 100%;
+        resize: none;
+        &::placeholder{
+            text-align: center
+        }
+        @include input-box;
     }
 
 }

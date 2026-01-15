@@ -11,37 +11,8 @@
     }
 }
 
-@mixin editor {
-    .editor-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .editor-box {
-            width: 30%;
-
-            @media (max-width: 600px) {
-                width: 50%;
-            }
-
-            resize: none;
-            @include input-box;
-        }
-    }
-}
-
-@mixin chatBox {
-    .chat-container {
-        border-radius: 5px;
-        border: 1px solid #303030;
-        background-color: #171717;
-        height: 50%;
-        overflow-y: scroll;
-        word-break: break-all;
-        white-space: pre-wrap;
-    }
-
-    .chat-container::-webkit-scrollbar {
+@mixin hideScrollBar {
+    &::-webkit-scrollbar {
         display: none;
     }
 }

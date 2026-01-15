@@ -8,9 +8,6 @@
     flex-direction: column;
     gap: 10px;
 
-    @include editor;
-    @include chatBox;
-
     .response-container::-webkit-scrollbar {
         display: none;
     }

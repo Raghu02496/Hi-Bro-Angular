@@ -10,8 +10,12 @@
     grid-template-areas: 
     "case-description case-description"
     "suspect-list chat-box"
-    "editor editor";
+    "suspect-list editor";
     gap: 10px;
+
+    @media (max-width: 767px) {
+        grid-template-columns: 35% 1fr;
+    }
 
     .suspects-container{
         display: flex;
@@ -19,8 +23,18 @@
         gap: 5px;
 
         .suspect{
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            gap: 5px;
             padding: 10px;
             border-top: 1px solid gray;
+
+            img{
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+            }
         }
 
         .active{

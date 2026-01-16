@@ -11,6 +11,7 @@
             Suspects (choose suspect to start interrogating): 
             @for (item of caseDetails.suspects; track $index) {
                 <div class="suspect" (click)="interrogatingSuspect = item;getConversation()" [class.active]="interrogatingSuspect?._id === item._id">
+                    <img src="https://i.redd.it/zwfggeplutf61.jpg" alt="">
                     <span>{{item.name}} : {{item.role}}</span>
                 </div>
             }

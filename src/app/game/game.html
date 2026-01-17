@@ -28,7 +28,7 @@
     </div>
 
     <div class="editor-container" style="grid-area: editor;" [formGroup]="interrogateFormGrp">
-        <textarea class="editor-box" formControlName="content" (keydown.enter)="msgChatGpt($event)" placeholder="Type and enter to question suspect"></textarea>
+        <input class="editor-box" formControlName="content" (keydown.enter)="msgChatGpt($event)" placeholder="Type and enter to question suspect"/>
     </div>
     
 </div>

@@ -45,13 +45,28 @@
     .chat-box{
         border-radius: 5px;
         border: 1px solid #303030;
-        background-color: #171717;
+        background-color: #1F1F1F;
         overflow-y: auto;
         word-break: break-all;
         white-space: pre-wrap;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start; //else the flex items will take full width
+        padding: 5px;
 
         .message{
-            margin: 0px 5px;
+            padding: 10px 15px 10px 10px;
+            min-width: 0;
+            border-radius: 10px;
+        }
+
+        .outgoing{
+            background-color: #2E5E4E;
+        }
+
+        .incoming{
+            background-color: #363636;
         }
 
         @include hideScrollBar;

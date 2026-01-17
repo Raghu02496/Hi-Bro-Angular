@@ -24,7 +24,7 @@
                 @if(first && loadMore){
                     <span InfiniteScroll (intersected)="getOldMessages()"></span>
                 }
-                <b>{{conversation.role === 'user' ? 'You' : interrogatingSuspect.name}}</b> : {{conversation.content}} <br>
+                <div class="message" [ngStyle]="{'text-align':conversation.role === 'user'? 'right' : 'left'}">{{conversation.content}}</div>
             </div>
         }
     </div>

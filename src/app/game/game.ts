@@ -5,12 +5,14 @@ import { conversation, caseDetails, suspect } from '../detective.interface';
 import { InfiniteScroll } from '../directives/infinite-scroll';
 import { ActivatedRoute } from '@angular/router';
 import { whiteSpaceValidator } from '../validators/validators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'game',
   imports: [
     ReactiveFormsModule,
-    InfiniteScroll
+    InfiniteScroll,
+    CommonModule
   ],
   templateUrl: './game.html',
   styleUrl: './game.scss'

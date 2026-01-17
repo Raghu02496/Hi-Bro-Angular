@@ -50,6 +50,10 @@
         word-break: break-all;
         white-space: pre-wrap;
 
+        .message{
+            margin: 0px 5px;
+        }
+
         @include hideScrollBar;
     }
 

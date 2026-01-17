@@ -8,11 +8,11 @@
 
     @if (caseDetails) {
         <div class="suspects-container" style="grid-area: suspect-list;">
-            Suspects (choose suspect to start interrogating): 
+            Suspects
             @for (item of caseDetails.suspects; track $index) {
                 <div class="suspect" (click)="interrogatingSuspect = item;getConversation()" [class.active]="interrogatingSuspect?._id === item._id">
                     <img src="https://i.redd.it/zwfggeplutf61.jpg" alt="">
-                    <span>{{item.name}} : {{item.role}}</span>
+                    <span>{{item.name}} ({{item.role}})</span>
                 </div>
             }
         </div>
@@ -20,12 +20,10 @@
 
     <div class="chat-box" style="grid-area: chat-box;" #chatBox>
         @for(conversation of conversationArr;track conversation._id;let first = $first){
-            <div style="padding: 5px;">
-                @if(first && loadMore){
-                    <span InfiniteScroll (intersected)="getOldMessages()"></span>
-                }
-                <div class="message" [ngStyle]="{'text-align':conversation.role === 'user'? 'right' : 'left'}">{{conversation.content}}</div>
-            </div>
+            @if(first && loadMore){
+                <span InfiniteScroll (intersected)="getOldMessages()"></span>
+            }
+            <div class="message" [ngClass]="conversation.role === 'user'? 'outgoing' : 'incoming'" [ngStyle]="{'align-self':conversation.role === 'user'? 'flex-end' : 'flex-start'}">{{conversation.content}}</div>
         }
     </div>
 

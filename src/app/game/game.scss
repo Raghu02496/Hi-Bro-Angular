@@ -73,11 +73,9 @@
     }
 
     .editor-box {
+        height: 40px;
         width: 100%;
         resize: none;
-        &::placeholder{
-            text-align: center
-        }
         @include input-box;
     }
 

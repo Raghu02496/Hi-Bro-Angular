@@ -14,3 +14,10 @@ html{
 *, *::before, *::after {
     box-sizing: inherit;
 }
+
+.primary-btn{
+    background: #303030;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}

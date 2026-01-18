@@ -7,20 +7,12 @@
     outline: none;
     border: none;
     &:focus{
-        border-color: #5865f2;;
+        border: 1px solid #5865f2;
     }
 }
 
 @mixin hideScrollBar {
     &::-webkit-scrollbar {
         display: none;
-    }
-}
-
-@mixin button {
-    .btn{
-        background: #303030;
-        color: #fff;
-        cursor: pointer;
     }
 }

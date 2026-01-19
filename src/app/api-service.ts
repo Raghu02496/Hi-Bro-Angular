@@ -37,19 +37,19 @@ export class ApiService {
   }
 
   sendMessage(request: any){
-    return this.httpClient.post(environment.apiUrl+'/protected/msgChatGpt',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/msgChatGpt',request)
   }
 
   getConversation(request : any){
-    return this.httpClient.post(environment.apiUrl+'/protected/getConversation',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/getConversation',request)
   }
 
   getCaseById(request : any){
-    return this.httpClient.post(environment.apiUrl+'/protected/getCaseById',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/getCaseById',request)
   }
 
   listCases(request: any){
-    return this.httpClient.post(environment.apiUrl+'/protected/listCases',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/listCases',request)
   }
 
   login(request : any){
@@ -57,19 +57,15 @@ export class ApiService {
   }
 
   logout(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/logout',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/logout',request)
   }
 
   refresh(request : any){
-    return this.httpClient.post(environment.apiUrl+'/refresh',request)
-  }
-
-  status(request : any){
-    return this.httpClient.post(environment.apiUrl+'/protected/status',request)
+    return this.httpClient.post(environment.apiUrl+'/y/protected/refresh',request)
   }
 
   listUsers(request: any){
-    return this.httpClient.post(environment.apiUrl+'/protected/listUsers',request)
+    return this.httpClient.post(environment.apiUrl+'/x/protected/listUsers',request)
   }
 
   sendSocket(payload : any){

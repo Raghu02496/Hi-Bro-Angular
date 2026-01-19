@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ApiService } from '../../api-service';
 import { CommonModule } from '@angular/common';
 import { whiteSpaceValidator } from '../../validators/validators';
+import { AuthService } from '../../core/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class Auth {
   constructor(
     private fb : FormBuilder,
     private apiService : ApiService,
-    private router : Router
+    private router : Router,
+    private authService: AuthService
   ){
     this.loginFrmGrp = fb.group({
       userName : ['',[Validators.required, whiteSpaceValidator()]],
@@ -41,6 +43,7 @@ export class Auth {
       this.apiService.login(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
+            this.authService.setAccessToken(res.accessToken);
             this.apiService.isLoggedIn = true;
             this.router.navigate(['/app/cases'])
           }

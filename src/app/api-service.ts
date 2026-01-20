@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from './../environments/environment';
 import { io, Socket } from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
+import { AuthService } from './core/auth-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class ApiService {
   connectSocket : Subject<void> = new Subject()
   socket !: Socket
   messageObservable$ !: Observable<string>
-  constructor(private httpClient : HttpClient){
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ){
     this.connectWebSocket();
   }
 
@@ -20,7 +24,12 @@ export class ApiService {
     this.connectSocket.subscribe({
       next : ()=>{
         if(this.isLoggedIn){
-          this.socket = io(environment.apiUrl,{ withCredentials : true });
+          this.socket = io(environment.apiUrl,{ 
+            withCredentials : true,
+            auth : {
+              accessToken : this.authService.getAccessToken()
+            }}
+          );
 
           this.messageObservable$ = new Observable((subscriber)=>{
             this.socket.on('sendMessage',(msg)=>{

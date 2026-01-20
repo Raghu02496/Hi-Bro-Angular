@@ -22,8 +22,9 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
 
     return next(cloned).pipe(
       catchError((error: HttpErrorResponse) => {
-        apiService.isLoggedIn = false;
-        router.navigate(['/login'])
+        if(error.status === 403){
+          location.reload();
+        }
         return throwError(() => error);
       })
     )

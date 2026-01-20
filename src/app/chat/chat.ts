@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ApiService } from '../api-service';
-import { whiteSpaceValidator } from '../validators/validators';
+import { ApiService } from '../core/services/api-service';
+import { whiteSpaceValidator } from '../core/validators/validators';
 
 @Component({
   selector: 'app-chat',

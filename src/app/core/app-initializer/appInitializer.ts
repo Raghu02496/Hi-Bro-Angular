@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
-import { ApiService } from "./api-service";
-import { AuthService } from "./core/auth-service";
+import { ApiService } from "../services/api-service";
+import { AuthService } from "../services/auth-service";
 
 export async function appInitializer() {
     const apiService = inject(ApiService);

@@ -29,11 +29,6 @@ export class Auth {
     })
   }
 
-  ngOnInit(){
-    this.apiService.logout({}).subscribe();
-    this.apiService.isLoggedIn = false;
-  }
-
   login(){
     if(this.loginFrmGrp.valid){
       let request = {

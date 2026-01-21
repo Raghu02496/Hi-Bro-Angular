@@ -12,7 +12,7 @@
             @for (item of caseDetails.suspects; track $index) {
                 <div class="suspect" (click)="interrogatingSuspect = item;getConversation()" [class.active]="interrogatingSuspect?._id === item._id">
                     <img [src]="'https://i.pravatar.cc/15'+$index" alt="">
-                    <span>{{item.name}} ({{item.role}})</span>
+                    <span class="sus-name">{{item.name}} ({{item.role}})</span>
                 </div>
             }
         </div>

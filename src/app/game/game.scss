@@ -6,7 +6,7 @@
     padding: 10px;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 20% 1fr;
     grid-template-areas: 
     "case-description case-description"
     "suspect-list chat-box"
@@ -34,6 +34,12 @@
                 height: 50px;
                 width: 50px;
                 border-radius: 50%;
+            }
+
+            .sus-name{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
 

@@ -1,14 +1,10 @@
 <div class="game-container">
 
-    <div style="grid-area: case-description;">
-        @if (caseDetails) {
-            {{caseDetails.description}}
-        }
-    </div>
+    <div style="grid-area: contacts-header;">Suspects</div>
+    <div style="grid-area: sus-header;"></div>
 
     @if (caseDetails) {
         <div class="suspects-container" style="grid-area: suspect-list;">
-            Suspects
             @for (item of caseDetails.suspects; track $index) {
                 <div class="suspect" (click)="interrogatingSuspect = item;getConversation()" [class.active]="interrogatingSuspect?._id === item._id">
                     <img [src]="'https://i.pravatar.cc/15'+$index" alt="">

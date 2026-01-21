@@ -6,9 +6,9 @@
     padding: 10px;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 20% 1fr;
     grid-template-areas: 
-    "case-description case-description"
+    "contacts-header sus-header"
     "suspect-list chat-box"
     "suspect-list editor";
     gap: 10px;
@@ -28,12 +28,17 @@
             align-items: center;
             gap: 5px;
             padding: 10px;
-            border-top: 1px solid gray;
 
             img{
                 height: 50px;
                 width: 50px;
                 border-radius: 50%;
+            }
+
+            .sus-name{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { ApiService } from '../../api-service';
+import { ApiService } from '../../core/services/api-service';
 import { CommonModule } from '@angular/common';
-import { whiteSpaceValidator } from '../../validators/validators';
-import { AuthService } from '../../core/auth-service';
+import { whiteSpaceValidator } from '../../core/validators/validators';
+import { AuthService } from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -27,11 +27,6 @@ export class Auth {
       userName : ['',[Validators.required, whiteSpaceValidator()]],
       password : ['',[Validators.required, whiteSpaceValidator()]]
     })
-  }
-
-  ngOnInit(){
-    this.apiService.logout({}).subscribe();
-    this.apiService.isLoggedIn = false;
   }
 
   login(){

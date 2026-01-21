@@ -2,8 +2,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angul
 import { inject } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { ApiService } from './api-service';
-import { AuthService } from './core/auth-service';
+import { ApiService } from '../services/api-service';
+import { AuthService } from '../services/auth-service';
 
 export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
 

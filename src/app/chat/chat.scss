@@ -1,14 +1,125 @@
 @use '../../mixins.scss' as *;
 
-.chat-container {
-    height: 100%;
+.chat-wrapper {
+    height: 100vh;
     width: 100%;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas: 
+    "list-header chat-header"
+    "user-list chat-area"
+    "user-list input-area";
+    gap: 15px;
 
-    .response-container::-webkit-scrollbar {
-        display: none;
+    @media (max-width: 767px) {
+        grid-template-columns: 80px 1fr;
+        
+        .user-name, .list-header-text {
+            display: none;
+        }
+    }
+
+    .users-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+        padding-right: 5px;
+        @include hideScrollBar;
+
+        .user-item {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+            background-color: #2a2a2a;
+
+            &:hover {
+                background-color: #383838;
+            }
+
+            img {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+            }
+
+            .user-name {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 0.95rem;
+                color: #e0e0e0;
+            }
+        }
+
+        .active {
+            background-color: #3f3f3f;
+            border-left: 3px solid #6366f1;
+        }
+    }
+
+    .chat-area {
+        border-radius: 8px;
+        border: 1px solid #333;
+        background-color: #1a1a1a;
+        overflow-y: auto;
+        word-break: break-word;
+        white-space: pre-wrap;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+
+        .message {
+            padding: 12px 18px;
+            min-width: 0;
+            max-width: 75%;
+            border-radius: 12px;
+            line-height: 1.5;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .outgoing {
+            background-color: #2E5E4E;
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .incoming {
+            background-color: #363636;
+            color: #e0e0e0;
+            border-bottom-left-radius: 2px;
+        }
+
+        @include hideScrollBar;
+    }
+
+    .input-area {
+        display: flex;
+        align-items: center;
+    }
+
+    .input-box {
+        width: 100%;
+        height: 50px;
+        font-size: 1rem;
+        padding: 0 15px;
+        @include input-box;
+        background-color: #2a2a2a;
+        border: 1px solid #333;
+        
+        &:focus {
+            border-color: #4f46e5;
+            background-color: #303030;
+        }
     }
 }

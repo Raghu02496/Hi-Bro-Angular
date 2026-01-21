@@ -1,0 +1,121 @@
+.dialog-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    .dialog-box {
+        background: #333;
+        color: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        width: 90%;
+        max-width: 450px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        animation: dialog-enter 0.3s ease-out;
+
+        .dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #444;
+
+            h2 {
+                margin: 0;
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+
+            .close-btn {
+                background: transparent;
+                border: none;
+                color: #aaa;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s, color 0.2s;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: #fff;
+                }
+            }
+        }
+
+        .dialog-content {
+            margin-bottom: 24px;
+            line-height: 1.5;
+            color: #ddd;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            .btn {
+                padding: 10px 20px;
+                border-radius: 6px;
+                font-weight: 500;
+                cursor: pointer;
+                border: none;
+                font-size: 0.95rem;
+                transition: background 0.2s, transform 0.1s;
+
+                &:active {
+                    transform: translateY(1px);
+                }
+
+                &.btn-secondary {
+                    background: transparent;
+                    color: #ccc;
+                    border: 1px solid #555;
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                        border-color: #666;
+                        color: #fff;
+                    }
+                }
+
+                &.btn-primary {
+                    background: #6366f1;
+                    /* Indigo-500 equivalent */
+                    color: white;
+
+                    &:hover {
+                        background: #4f46e5;
+                        /* Indigo-600 */
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+@keyframes dialog-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

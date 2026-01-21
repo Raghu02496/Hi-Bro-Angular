@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment } from '../../../environments/environment';
 
 export function loggerInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
 

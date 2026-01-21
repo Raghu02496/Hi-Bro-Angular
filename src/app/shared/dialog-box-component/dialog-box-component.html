@@ -1,0 +1,30 @@
+<div class="dialog-container">
+    <div class="dialog-box">
+        <!-- Dialog Header -->
+        <div class="dialog-header">
+            <h2>{{ data.header }}</h2>
+            <button (click)="close.emit(false)" class="close-btn">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </div>
+
+        <!-- Dialog Content -->
+        <div class="dialog-content">
+            <p>{{ data.content }}</p>
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
+            @if(data.actions[0]) {
+                <button (click)="close.emit(false)" class="btn btn-secondary">
+                    {{ data.actions[0] }}
+                </button>
+            }
+            @if(data.actions[1]) {
+                <button (click)="close.emit(true)" class="btn btn-primary">
+                    {{ data.actions[1] }}
+                </button>
+            }
+        </div>
+    </div>
+</div>

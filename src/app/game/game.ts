@@ -1,11 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '../api-service';
-import { conversation, caseDetails, suspect } from '../detective.interface';
+import { ApiService } from '../core/services/api-service';
+import { conversation, caseDetails, suspect } from '../models/detective.interface';
 import { InfiniteScroll } from '../directives/infinite-scroll';
 import { ActivatedRoute } from '@angular/router';
-import { whiteSpaceValidator } from '../validators/validators';
+import { whiteSpaceValidator } from '../core/validators/validators';
 import { CommonModule } from '@angular/common';
+import { DialogService } from '../core/dialog-service';
 
 @Component({
   selector: 'game',
@@ -32,7 +33,8 @@ export class Game {
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private dialogService: DialogService
   ) {
     this.interrogateFormGrp = fb.group({
       content: ['', [Validators.required,whiteSpaceValidator()]],
@@ -130,6 +132,12 @@ export class Game {
       next : (res:any)=>{
         if(res.ok){
           this.caseDetails = res.data
+
+          this.dialogService.openDialog({
+            header : "Ready to solve the case ?!!",
+            content : this.caseDetails.description,
+            actions : ["OK"]
+          })
         }
       }
     })

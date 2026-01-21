@@ -3,7 +3,7 @@ import { Game } from './game/game';
 import { Auth } from './auth/login/login';
 import { Cases } from './cases/cases';
 import { Chat } from './chat/chat';
-import { checkLoggedInGuard } from './check-logged-in-guard';
+import { checkLoggedInGuard } from './core/guards/check-logged-in-guard';
 
 export const routes: Routes = [
     {

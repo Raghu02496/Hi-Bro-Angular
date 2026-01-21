@@ -2,11 +2,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../core/services/api-service';
 import { whiteSpaceValidator } from '../core/validators/validators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './chat.html',
   styleUrl: './chat.scss'
@@ -29,8 +31,8 @@ export class Chat {
   ngOnInit(){
     this.apiService.recieveMessage().subscribe({
       next : (data:any)=>{
-        if(this.selectedUser._id === data.fromUserId){
-          this.messagesArr.push(data.message)
+        if(this.selectedUser?._id === data.fromUserId){
+          this.messagesArr.push({content: data.message, type: 'incoming'})
           this.scrollToBottom();
         }
       }
@@ -50,7 +52,7 @@ export class Chat {
     event.preventDefault();
     if(this.messageFormGrp.valid && this.selectedUser){
       const message = this.messageFormGrp.get('message')?.value.trim()
-      this.messagesArr.push(message)
+      this.messagesArr.push({content: message, type: 'outgoing'})
       this.apiService.sendSocket({toUserId : this.selectedUser._id, message : message});
       this.scrollToBottom();
       this.messageFormGrp.reset({

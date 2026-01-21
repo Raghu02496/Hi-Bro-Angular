@@ -1,24 +1,35 @@
-<div class="chat-container">
-    <div class="editor-container" [formGroup]="messageFormGrp">
-        <textarea class="editor-box" formControlName="message" (keydown.enter)="sendMessage($event)" placeholder="Type and enter to send message"></textarea>
-    </div>
-    
-    <div class="chat-container" #chatBox>
-        @for(message of messagesArr;track $index;let first = $first){
-            <div style="padding: 5px;">
-                {{message}} <br>
-            </div>
-        }
+<div class="chat-wrapper">
+    <div style="grid-area: list-header; font-weight: bold; padding: 10px 0;">Contacts</div>
+    <div style="grid-area: chat-header; font-weight: bold; padding: 10px 0; border-bottom: 1px solid #333;">
+       @if(selectedUser) {
+           <span style="display: flex; align-items: center; gap: 10px;">
+                <img [src]="'https://i.pravatar.cc/15' + users.indexOf(selectedUser)" style="height: 30px; width: 30px; border-radius: 50%;">
+                {{selectedUser.userName}}
+           </span>
+       } @else {
+           Select a user to start chatting
+       }
     </div>
 
-    <div class="suspects-container">
-        Users (choose user to start chatting): 
+    <div class="users-list" style="grid-area: user-list;">
         @for (item of users; track $index) {
-            <div>
-                <input type="radio" [checked]="selectedUser?._id === item._id" (change)="selectedUser = item;messagesArr = []">
-                <span>{{item.userName}}</span>
+            <div class="user-item" (click)="selectedUser = item; messagesArr = []" [class.active]="selectedUser?._id === item._id">
+                <img [src]="'https://i.pravatar.cc/15'+$index" alt="">
+                <span class="user-name">{{item.userName}}</span>
             </div>
         }
     </div>
 
+    <div class="chat-area" style="grid-area: chat-area;" #chatBox>
+        @for(msg of messagesArr; track $index){
+             <div class="message" [ngClass]="msg.type === 'outgoing' ? 'outgoing' : 'incoming'" 
+                  [ngStyle]="{'align-self': msg.type === 'outgoing' ? 'flex-end' : 'flex-start'}">
+                  {{msg.content}}
+             </div>
+        }
+    </div>
+
+    <div class="input-area" style="grid-area: input-area;" [formGroup]="messageFormGrp">
+         <input class="input-box" formControlName="message" (keydown.enter)="sendMessage($event)" placeholder="Type and enter to send message" autocomplete="off"/>
+    </div>
 </div>

@@ -1,5 +1,24 @@
-<div class="login-container" [formGroup]="loginFrmGrp">
-    <input type="text" class="item" placeholder="User name" formControlName="userName">
-    <input type="password" class="item" placeholder="Password" formControlName="password">
-    <button class="primary-btn login-btn" (click)="login()">Login</button>
+<div class="login-wrapper">
+    <div class="login-card" [formGroup]="loginFrmGrp">
+        <h1 class="login-title">Welcome Back</h1>
+ 
+        <div class="input-group">
+            <input type="text" placeholder="Email" formControlName="email">
+        </div>
+        
+        <div class="input-group">
+            <input type="password" placeholder="Password" formControlName="password">
+        </div>
+        
+        <button class="primary-btn login-btn" (click)="login()">Login</button>
+        
+        <div class="divider">
+            <span>or</span>
+        </div>
+        
+        <button class="google-btn" (click)="loginWithGoogle()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo">
+            <span>Sign in with Google</span>
+        </button>
+    </div>
 </div>

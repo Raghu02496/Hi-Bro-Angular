@@ -22,7 +22,7 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
 
     return next(cloned).pipe(
       catchError((error: HttpErrorResponse) => {
-        if(error.status === 403){
+        if(error.status === 401){
           location.reload();
         }
         return throwError(() => error);

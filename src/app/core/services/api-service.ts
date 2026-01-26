@@ -62,7 +62,11 @@ export class ApiService {
   }
 
   login(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/login',request)
+    return this.httpClient.post(environment.apiUrl+'/public/loginWithEmail',request)
+  }
+
+  loginWithGoogle(request : any){
+    return this.httpClient.post(environment.apiUrl+'/public/loginWithGoogle',request)
   }
 
   logout(request : any){

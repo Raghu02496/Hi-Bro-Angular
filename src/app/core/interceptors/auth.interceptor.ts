@@ -15,8 +15,6 @@ export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Obs
       return next(cloned);
     }
 
-    const router = inject(Router)
-    const apiService = inject(ApiService)
     const authService = inject(AuthService);
 
     let cloned = req.clone({

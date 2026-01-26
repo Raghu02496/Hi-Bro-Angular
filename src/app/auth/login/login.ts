@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { whiteSpaceValidator } from '../../core/validators/validators';
 import { AuthService } from '../../core/services/auth-service';
 import { EMPTY, switchMap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -73,7 +74,7 @@ export class Auth {
   loginWithGoogle(){
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth` +
     `?client_id=1021093571994-4thj77b8qff06oitdmejmpocujijqvfp.apps.googleusercontent.com` +
-    `&redirect_uri=http://localhost:9001/login` +
+    `&redirect_uri=${environment.googleRedirectUri}` +
     `&response_type=code` +
     `&scope=openid email profile`;
   }

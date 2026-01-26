@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { io, Socket } from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth-service';
+import { SKIP_AUTH_INTERCEPTOR } from '../interceptors/skip-interceptor.token';
 
 @Injectable({
   providedIn: 'root'
@@ -74,7 +75,9 @@ export class ApiService {
   }
 
   refresh(request : any){
-    return this.httpClient.post(environment.apiUrl+'/y/protected/refresh',request)
+    return this.httpClient.post(environment.apiUrl+'/y/protected/refresh',request, {
+      context : new HttpContext().set(SKIP_AUTH_INTERCEPTOR, true)
+    })
   }
 
   listUsers(request: any){

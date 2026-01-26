@@ -4,20 +4,26 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api-service';
 import { AuthService } from '../services/auth-service';
+import { SKIP_AUTH_INTERCEPTOR } from './skip-interceptor.token';
 
 export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
+
+    if(req.context.get(SKIP_AUTH_INTERCEPTOR)){
+      let cloned = req.clone({
+        withCredentials: true
+      });
+      return next(cloned);
+    }
 
     const router = inject(Router)
     const apiService = inject(ApiService)
     const authService = inject(AuthService);
 
-    let cloned = req
-
-    cloned = req.clone({
-        withCredentials: true,
-        setHeaders: {
-          Authorization: `Bearer ${authService.getAccessToken()}`
-        }
+    let cloned = req.clone({
+      withCredentials: true,
+      setHeaders: {
+        Authorization: `Bearer ${authService.getAccessToken()}`
+      }
     });
 
     return next(cloned).pipe(

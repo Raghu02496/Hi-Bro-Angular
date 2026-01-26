@@ -47,41 +47,41 @@ export class ApiService {
   }
 
   sendMessage(request: any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/msgChatGpt',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/msgChatGpt',request)
   }
 
   getConversation(request : any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/getConversation',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/getConversation',request)
   }
 
   getCaseById(request : any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/getCaseById',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/getCaseById',request)
   }
 
   listCases(request: any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/listCases',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/listCases',request)
   }
 
   login(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/loginWithEmail',request)
+    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithEmail',request)
   }
 
   loginWithGoogle(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/loginWithGoogle',request)
+    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithGoogle',request)
   }
 
   logout(request : any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/logout',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/logout',request)
   }
 
   refresh(request : any){
-    return this.httpClient.post(environment.apiUrl+'/y/protected/refresh',request, {
+    return this.httpClient.post(environment.apiUrl+'/protected/auth/refresh',request, {
       context : new HttpContext().set(SKIP_AUTH_INTERCEPTOR, true)
     })
   }
 
   listUsers(request: any){
-    return this.httpClient.post(environment.apiUrl+'/x/protected/listUsers',request)
+    return this.httpClient.post(environment.apiUrl+'/protected/game/listUsers',request)
   }
 
   sendSocket(payload : any){

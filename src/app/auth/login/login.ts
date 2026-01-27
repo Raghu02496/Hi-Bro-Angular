@@ -47,7 +47,6 @@ export class Auth {
     ).subscribe({
       next: (res: any)=>{
         this.authService.setAccessToken(res.accessToken);
-        this.apiService.isLoggedIn = true;
         this.router.navigate(['/app/cases'])
       }
     })
@@ -63,7 +62,6 @@ export class Auth {
         next : (res:any)=>{
           if(res.ok){
             this.authService.setAccessToken(res.accessToken);
-            this.apiService.isLoggedIn = true;
             this.router.navigate(['/app/cases'])
           }
         }

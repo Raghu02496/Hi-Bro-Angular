@@ -1,8 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { ApiService } from '../services/api-service';
 import { AuthService } from '../services/auth-service';
 import { SKIP_AUTH_INTERCEPTOR } from './skip-interceptor.token';
 

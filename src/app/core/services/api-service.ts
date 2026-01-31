@@ -102,7 +102,6 @@ export class ApiService {
       tap({
         next: (value: any)=>{
           this.authService.setAccessToken(value.accessToken);
-          this.openGate();
         }
       })
     )

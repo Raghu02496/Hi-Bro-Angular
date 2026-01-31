@@ -1,34 +1,46 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, defer, mergeMap, Observable, retry, retryWhen, throwError } from 'rxjs';
 import { AuthService } from '../services/auth-service';
 import { SKIP_AUTH_INTERCEPTOR } from './skip-interceptor.token';
+import { ApiService } from '../services/api-service';
 
-export function authInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
+export function authInterceptor(
+  req: HttpRequest<any>,
+  next: HttpHandlerFn
+): Observable<HttpEvent<any>> {
+  if (req.context.get(SKIP_AUTH_INTERCEPTOR)) {
+    let cloned = req.clone({
+      withCredentials: true,
+    });
+    return next(cloned);
+  }
 
-    if(req.context.get(SKIP_AUTH_INTERCEPTOR)){
-      let cloned = req.clone({
-        withCredentials: true
-      });
-      return next(cloned);
-    }
+  const authService = inject(AuthService);
+  const apiService = inject(ApiService);
 
-    const authService = inject(AuthService);
-
+  return defer(() => {
     let cloned = req.clone({
       withCredentials: true,
       setHeaders: {
-        Authorization: `Bearer ${authService.getAccessToken()}`
-      }
+        Authorization: `Bearer ${authService.getAccessToken()}`,
+      },
     });
 
-    return next(cloned).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if(error.status === 401){
-          location.reload();
-        }
-        return throwError(() => error);
-      })
-    )
+    return apiService.waitUntillGateOpen().pipe(mergeMap((value) => next(cloned)));
+  }).pipe(
+    retry({
+      delay: (error, retryCount) => {
+        if (error.status === 401) {
+          apiService.closeGate();
+          apiService.refresh({}).subscribe();
 
-  }
+          if (retryCount === 3) {
+            throw error;
+          }
+        }
+        return apiService.waitUntillGateOpen();
+      },
+    })
+  );
+}

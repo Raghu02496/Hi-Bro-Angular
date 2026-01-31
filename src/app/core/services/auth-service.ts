@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private accessToken : string = ''
 
+  isLoggedIn(): boolean {
+    return !!this.accessToken;
+  }
+
   setAccessToken(token : string){
     this.accessToken = token;
   }

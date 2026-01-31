@@ -79,11 +79,15 @@ export class ApiService {
   }
 
   login(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithEmail',request)
+    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithEmail',request, {
+      context : new HttpContext().set(SKIP_AUTH_INTERCEPTOR, true)
+    })
   }
 
   loginWithGoogle(request : any){
-    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithGoogle',request)
+    return this.httpClient.post(environment.apiUrl+'/public/auth/loginWithGoogle',request, {
+      context : new HttpContext().set(SKIP_AUTH_INTERCEPTOR, true)
+    })
   }
 
   logout(request : any){

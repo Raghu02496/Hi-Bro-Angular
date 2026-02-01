@@ -32,11 +32,10 @@ export function authInterceptor(
       tap({
         next: (res: HttpEvent<any>) => {
           if (res instanceof HttpResponse) {
-            const paramsArr = req.urlWithParams.split('/');
-            if (paramsArr[paramsArr.length - 1] === 'refresh') {
+            if (res.body.ok) {
               authService.setAccessToken(res.body.accessToken);
+              apiService.openGate();
             }
-            apiService.openGate();
           }
         },
       })

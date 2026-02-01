@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { ApiService } from './api-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private accessToken : string = ''
-
+  private apiService = inject(ApiService);
   isLoggedIn(): boolean {
     return !!this.accessToken;
   }
@@ -16,5 +17,10 @@ export class AuthService {
 
   getAccessToken(){
     return this.accessToken;
+  }
+
+  logout(){
+    this.setAccessToken('');
+    this.apiService.logout({}).subscribe()
   }
 }

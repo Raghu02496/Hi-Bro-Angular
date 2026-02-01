@@ -7,6 +7,7 @@ import { ApiService } from './api-service';
 export class AuthService {
   private accessToken : string = ''
   private apiService = inject(ApiService);
+
   isLoggedIn(): boolean {
     return !!this.accessToken;
   }

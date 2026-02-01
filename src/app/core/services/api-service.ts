@@ -10,36 +10,12 @@ import { SKIP_AUTH_INTERCEPTOR } from '../interceptors/skip-interceptor.token';
   providedIn: 'root'
 })
 export class ApiService {
-  connectSocket : Subject<void> = new Subject()
-  socket !: Socket
-  messageObservable$ !: Observable<string>;
+  
   private gate$ : BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
+    private httpClient: HttpClient
   ){
-    this.connectWebSocket();
-  }
-
-  connectWebSocket(){
-    this.connectSocket.subscribe({
-      next : ()=>{
-        if(this.authService.isLoggedIn()){
-          this.socket = io(environment.apiUrl,{ 
-            withCredentials : true,
-            auth : {
-              accessToken : this.authService.getAccessToken()
-            }}
-          );
-
-          this.messageObservable$ = new Observable((subscriber)=>{
-            this.socket.on('sendMessage',(msg)=>{
-              subscriber.next(msg)
-            })
-          })
-        }
-      }
-    })
+    
   }
 
   waitUntillGateOpen() {
@@ -56,10 +32,6 @@ export class ApiService {
 
   closeGate(){
     this.gate$.next(false);
-  }
-
-  recieveMessage(){
-    return this.messageObservable$;
   }
 
   sendMessage(request: any){
@@ -104,8 +76,4 @@ export class ApiService {
     return this.httpClient.post(environment.apiUrl+'/protected/game/listUsers',request)
   }
 
-  sendSocket(payload : any){
-    this.socket.emit('sendMessage',payload)
-  }
-  
 }

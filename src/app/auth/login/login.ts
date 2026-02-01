@@ -26,6 +26,11 @@ export class Auth {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute
   ){
+
+    if(this.authService.isLoggedIn()){
+      this.authService.logout();
+    }
+
     this.loginFrmGrp = fb.group({
       email : ['',[Validators.required, whiteSpaceValidator()]],
       password : ['',[Validators.required, whiteSpaceValidator()]]
@@ -46,7 +51,6 @@ export class Auth {
       })
     ).subscribe({
       next: (res: any)=>{
-        this.authService.setAccessToken(res.accessToken);
         this.router.navigate(['/app/cases'])
       }
     })
@@ -61,7 +65,6 @@ export class Auth {
       this.apiService.login(request).subscribe({
         next : (res:any)=>{
           if(res.ok){
-            this.authService.setAccessToken(res.accessToken);
             this.router.navigate(['/app/cases'])
           }
         }

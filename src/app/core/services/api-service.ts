@@ -98,13 +98,6 @@ export class ApiService {
     return this.httpClient.post(environment.apiUrl+'/protected/auth/refresh',request, {
       context : new HttpContext().set(SKIP_AUTH_INTERCEPTOR, true)
     })
-    .pipe(
-      tap({
-        next: (value: any)=>{
-          this.authService.setAccessToken(value.accessToken);
-        }
-      })
-    )
   }
 
   listUsers(request: any){

@@ -1,6 +1,17 @@
-import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandlerFn,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, defer, mergeMap, Observable, retry, retryWhen, tap, throwError } from 'rxjs';
+import {
+  defer,
+  mergeMap,
+  Observable,
+  retry,
+  tap,
+} from 'rxjs';
 import { AuthService } from '../services/auth-service';
 import { SKIP_AUTH_INTERCEPTOR } from './skip-interceptor.token';
 import { ApiService } from '../services/api-service';
@@ -19,9 +30,15 @@ export function authInterceptor(
 
     return next(cloned).pipe(
       tap({
-        next: (res) => {
-          apiService.openGate();
-        }
+        next: (res: HttpEvent<any>) => {
+          if (res instanceof HttpResponse) {
+            const paramsArr = req.urlWithParams.split('/');
+            if (paramsArr[paramsArr.length - 1] === 'refresh') {
+              authService.setAccessToken(res.body.accessToken);
+            }
+            apiService.openGate();
+          }
+        },
       })
     );
   }

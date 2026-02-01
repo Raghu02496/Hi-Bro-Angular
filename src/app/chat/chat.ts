@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiService } from '../core/services/api-service';
 import { whiteSpaceValidator } from '../core/validators/validators';
 import { CommonModule } from '@angular/common';
+import { SocketService } from '../core/services/socket-service';
 
 @Component({
   selector: 'app-chat',
@@ -20,16 +21,16 @@ export class Chat {
   selectedUser  : any
   @ViewChild('chatBox',{read : ElementRef}) chatBox !: ElementRef<HTMLDivElement>
 
-  constructor(private apiService : ApiService,private fb : FormBuilder){
+  constructor(private apiService : ApiService,private fb : FormBuilder, private socketService: SocketService){
     this.messageFormGrp = fb.group({
       message: ['', [Validators.required,whiteSpaceValidator()]],
     })
 
-    this.apiService.connectSocket.next();
+    this.socketService.connectSocket.next();
   }
 
   ngOnInit(){
-    this.apiService.recieveMessage().subscribe({
+    this.socketService.recieveMessage().subscribe({
       next : (data:any)=>{
         if(this.selectedUser?._id === data.fromUserId){
           this.messagesArr.push({content: data.message, type: 'incoming'})
@@ -53,7 +54,7 @@ export class Chat {
     if(this.messageFormGrp.valid && this.selectedUser){
       const message = this.messageFormGrp.get('message')?.value.trim()
       this.messagesArr.push({content: message, type: 'outgoing'})
-      this.apiService.sendSocket({toUserId : this.selectedUser._id, message : message});
+      this.socketService.sendSocket({toUserId : this.selectedUser._id, message : message});
       this.scrollToBottom();
       this.messageFormGrp.reset({
         message: ''
@@ -68,7 +69,7 @@ export class Chat {
   }
 
   ngOnDestroy(){
-    this.apiService.socket.disconnect();
+    this.socketService.socket.disconnect();
   }
 
 }

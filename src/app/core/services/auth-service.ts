@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   logout(){
-    this.setAccessToken('');
     this.apiService.logout({}).subscribe()
+    this.setAccessToken('');
   }
 }

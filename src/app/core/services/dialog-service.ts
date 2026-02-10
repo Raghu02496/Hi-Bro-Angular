@@ -1,6 +1,6 @@
 import { ApplicationRef, createComponent, EnvironmentInjector, Injectable } from '@angular/core';
-import { DialogBoxComponent } from '../shared/dialog-box-component/dialog-box-component';
-import { DialogData } from '../models/dialog.model';
+import { DialogBoxComponent } from '../../shared/dialog-box-component/dialog-box-component';
+import { DialogData } from '../../models/dialog.model';
 
 @Injectable({
   providedIn: 'root'

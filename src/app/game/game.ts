@@ -6,7 +6,7 @@ import { InfiniteScroll } from '../directives/infinite-scroll';
 import { ActivatedRoute } from '@angular/router';
 import { whiteSpaceValidator } from '../core/validators/validators';
 import { CommonModule } from '@angular/common';
-import { DialogService } from '../core/dialog-service';
+import { DialogService } from '../core/services/dialog-service';
 
 @Component({
   selector: 'game',
